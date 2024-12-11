@@ -1,0 +1,8 @@
+env/
+__pycache__/
+*.sqlite3
+api/upload_videos/*
+api/upload_images/*
+
+# DO NOT DELETE
+core/secrets.py 
