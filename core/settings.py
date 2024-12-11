@@ -16,8 +16,8 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_URL = ''
-MEDIA_ROOT = ''
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://houseofharmonymusic-api.onrender.com']
 
 
 # Application definition
@@ -87,8 +87,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        default=os.getenv('DATABASE_URL', 'postgresql://houseofharmonymusic_db_user:Sn9awJ4pLjzzDgPtDzgFbJd66DwZb1dh@dpg-ctcoiv0gph6c73atj3t0-a.oregon-postgres.render.com/houseofharmonymusic_db'),
         conn_max_age=600
     )
 }
@@ -149,7 +148,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173'
+    #'http://localhost:5173'
+    'https://houseofharmonymusic.onrender.com/'
 ]
 
 REST_FRAMEWORK = {
@@ -166,7 +166,8 @@ REST_FRAMEWORK = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:5173'
+    #'http://localhost:5173'
+    'https://houseofharmonymusic.onrender.com/'
 ]
 
 CSRF_COOKIE_SAMESITE = 'Strict'
@@ -174,10 +175,8 @@ SESSION_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = True
 CSRF_USE_SESSIONS = False
-
-# After deployment use these settings
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # stripe payment
 # STRIPE_SECRET_KEY = ''
