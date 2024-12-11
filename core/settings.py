@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://houseofharmonymusic-api.onrender.com']
+ALLOWED_HOSTS = ['houseofharmonymusic-api.onrender.com']
 
 
 # Application definition
@@ -148,8 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    #'http://localhost:5173'
-    'https://houseofharmonymusic.onrender.com/'
+    'https://houseofharmonymusic.onrender.com'
 ]
 
 REST_FRAMEWORK = {
@@ -166,8 +165,7 @@ REST_FRAMEWORK = {
 }
 
 CSRF_TRUSTED_ORIGINS = [
-    #'http://localhost:5173'
-    'https://houseofharmonymusic.onrender.com/'
+    'https://houseofharmonymusic.onrender.com'
 ]
 
 CSRF_COOKIE_SAMESITE = 'Strict'
