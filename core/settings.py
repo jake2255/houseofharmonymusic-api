@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from .secrets import *
 import dj_database_url
 import os
 
@@ -25,7 +24,7 @@ MEDIA_ROOT = ''
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -181,5 +180,5 @@ CSRF_USE_SESSIONS = False
 # SESSION_COOKIE_SECURE = True
 
 # stripe payment
-STRIPE_SECRET_KEY = STRIPE_SECRET_KEY
-STRIPE_WEBHOOK_SECRET = STRIPE_SECRET_KEY
+# STRIPE_SECRET_KEY = ''
+# STRIPE_WEBHOOK_SECRET = ''
