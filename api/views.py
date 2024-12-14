@@ -98,9 +98,12 @@ class LoginAccountView(APIView):
 class LogoutAccountView(APIView):
     """Logout user's account"""
     def post(self, request):
+        print(request.COOKIES)
         if request.user.is_authenticated:
+            print("USER HAS A SESSION")
             logout(request) # built-in function that logs out user and ends session
             return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
+        print("USER DOES NOT HAVE A SESSION")
         return Response({'error': 'Logout failed, user not authenticated.'}, status=status.HTTP_403_FORBIDDEN)
 
 class AccountView(APIView):
