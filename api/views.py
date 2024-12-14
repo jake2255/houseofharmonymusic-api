@@ -98,8 +98,10 @@ class LoginAccountView(APIView):
 class LogoutAccountView(APIView):
     """Logout user's account"""
     def post(self, request):
-        logout(request) # built-in function that logs out user and ends session
-        return Response({'message': 'Logged out successfully'}, status=status.HTTP_200_OK)
+        if request.user.is_authenticated:
+            logout(request) # built-in function that logs out user and ends session
+            return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
+        return Response({'error': 'Logout failed, user not authenticated.'}, status=status.HTTP_403_FORBIDDEN)
 
 class AccountView(APIView):
     """Retrieve and update an account"""
