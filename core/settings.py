@@ -61,17 +61,31 @@ INSTALLED_APPS = [
 #     'django.contrib.messages.middleware.MessageMiddleware',
 #     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 # ]
+
+# MIDDLEWARE = [
+#     "whitenoise.middleware.WhiteNoiseMiddleware",
+#     "corsheaders.middleware.CorsMiddleware",
+#     "django.middleware.csrf.CsrfViewMiddleware",
+#     "django.middleware.security.SecurityMiddleware",
+#     "django.contrib.sessions.middleware.SessionMiddleware",
+#     "django.middleware.common.CommonMiddleware",
+#     "django.contrib.auth.middleware.AuthenticationMiddleware",
+#     "django.contrib.messages.middleware.MessageMiddleware",
+#     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+# ]
+
 MIDDLEWARE = [
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",  # Security policies first
+    "whitenoise.middleware.WhiteNoiseMiddleware",     # Serve static files early
+    "corsheaders.middleware.CorsMiddleware",          # Handle CORS headers early
+    "django.contrib.sessions.middleware.SessionMiddleware",  # Session handling
+    "django.middleware.common.CommonMiddleware",       # Common HTTP functionalities
+    "django.middleware.csrf.CsrfViewMiddleware",       # CSRF protection
+    "django.contrib.auth.middleware.AuthenticationMiddleware",  # Auth handling
+    "django.contrib.messages.middleware.MessageMiddleware",  # Flash messages
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",  # Prevent clickjacking
 ]
+
 
 ROOT_URLCONF = 'core.urls'
 
