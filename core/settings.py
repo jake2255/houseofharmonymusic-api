@@ -86,7 +86,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",  # Prevent clickjacking
 ]
 
-
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -172,11 +171,6 @@ if not DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    'https://houseofharmonymusic.onrender.com'
-]
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
@@ -190,8 +184,15 @@ REST_FRAMEWORK = {
     }
 }
 
-CSRF_TRUSTED_ORIGINS = [
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
     'https://houseofharmonymusic.onrender.com'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://houseofharmonymusic.onrender.com',
+    'https://houseofharmonymusic-api.onrender.com'
 ]
 
 CSRF_COOKIE_SAMESITE = 'None'
