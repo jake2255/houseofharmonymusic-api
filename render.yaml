@@ -20,3 +20,6 @@ services:
         generateValue: true
       - key: WEB_CONCURRENCY
         value: 4
+    routes:
+      - path: /media/*
+        disk: /var/lib/django/media
