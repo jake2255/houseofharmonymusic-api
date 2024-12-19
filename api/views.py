@@ -34,6 +34,15 @@ from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib.auth.tokens import PasswordResetTokenGenerator, default_token_generator
+from django.http import Http404
+from django.views.static import serve as static_serve
+import os
+
+def serve_media(request, path):
+    media_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(media_path):
+        return static_serve(request, path, document_root=settings.MEDIA_ROOT)
+    raise Http404("Media file not found")
 
 def CheckAuthenticationView(request):
     """Checks if the requesting user is logged in"""
