@@ -10,6 +10,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from custom_storage import *
 
 # Uses meta data to modify default User model to make emails unique
 User._meta.get_field('email')._unique = True 
@@ -19,8 +20,8 @@ class Lesson(models.Model):
     title = models.CharField(max_length=50)
     overview = models.TextField()
     description = models.TextField()
-    video = models.FileField(upload_to='api/upload_videos/', blank=True, null=True)
-    image = models.ImageField(upload_to='api/upload_images/', blank=True, null=True)
+    video = models.FileField(storage=PrivateMediaStorage(), upload_to='api/upload_videos/', blank=True, null=True)
+    image = models.ImageField(storage=PrivateMediaStorage(), upload_to='api/upload_images/', blank=True, null=True)
 
     def __str__(self):
         """defines string representation of Lesson object"""
@@ -33,7 +34,7 @@ class Course(models.Model):
     description = models.TextField()
     lessons = models.ManyToManyField(Lesson, blank=True) # each course can hold multiple lessons 
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    cover_image = models.ImageField(upload_to='api/upload_images', blank=True, null=True)
+    cover_image = models.ImageField(storage=PublicMediaStorage, upload_to='api/upload_images', blank=True, null=True)
 
     def __str__(self):
         """defines string representation of Course object"""

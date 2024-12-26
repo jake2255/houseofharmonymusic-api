@@ -13,13 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+from storages.backends.s3boto3 import S3Boto3Storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/var/lib/django/media'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -40,6 +37,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'corsheaders',
+    'storages',
 
     # Default apps
     'django.contrib.admin',
@@ -50,40 +48,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# MIDDLEWARE = [
-#     'corsheaders.middleware.CorsMiddleware',
-#     'django.middleware.security.SecurityMiddleware',
-#     'whitenoise.middleware.WhiteNoiseMiddleware',
-#     'django.contrib.sessions.middleware.SessionMiddleware',
-#     'django.middleware.common.CommonMiddleware',
-#     'django.middleware.csrf.CsrfViewMiddleware',
-#     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#     'django.contrib.messages.middleware.MessageMiddleware',
-#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-# ]
-
-# MIDDLEWARE = [
-#     "whitenoise.middleware.WhiteNoiseMiddleware",
-#     "corsheaders.middleware.CorsMiddleware",
-#     "django.middleware.csrf.CsrfViewMiddleware",
-#     "django.middleware.security.SecurityMiddleware",
-#     "django.contrib.sessions.middleware.SessionMiddleware",
-#     "django.middleware.common.CommonMiddleware",
-#     "django.contrib.auth.middleware.AuthenticationMiddleware",
-#     "django.contrib.messages.middleware.MessageMiddleware",
-#     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-# ]
-
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",  # Security policies first
-    "whitenoise.middleware.WhiteNoiseMiddleware",     # Serve static files early
-    "corsheaders.middleware.CorsMiddleware",          # Handle CORS headers early
-    "django.contrib.sessions.middleware.SessionMiddleware",  # Session handling
-    "django.middleware.common.CommonMiddleware",       # Common HTTP functionalities
-    "django.middleware.csrf.CsrfViewMiddleware",       # CSRF protection
-    "django.contrib.auth.middleware.AuthenticationMiddleware",  # Auth handling
-    "django.contrib.messages.middleware.MessageMiddleware",  # Flash messages
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",  # Prevent clickjacking
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -157,15 +131,6 @@ EMAIL_HOST_USER = 'houseofharmonymusic@gmail.com'
 EMAIL_HOST_PASSWORD = 'slvu hurc zrde fnmq'
 ''' App password: slvu hurc zrde fnmq '''
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = '/static/'
-
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -186,7 +151,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = [
+CORS_ALLOWED_ORIGINS = [  
     'https://houseofharmonymusic.onrender.com'
 ]
 
@@ -209,3 +174,28 @@ SESSION_COOKIE_SECURE = True
 # stripe payment
 STRIPE_SECRET_KEY = 'xxx'
 STRIPE_WEBHOOK_SECRET = 'xxx'
+
+# Static files and Media configurations
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_DEFAULT_ACL = None
+
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=2592000",
+}
+
+STATICFILES_LOCATION = "static"
+STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/"
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+MEDIAFILES_LOCATION = "media"
+MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/"
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
