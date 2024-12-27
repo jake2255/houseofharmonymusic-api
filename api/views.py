@@ -284,12 +284,12 @@ class LessonView(APIView):
             lesson_data = LessonSerializer(lesson).data # serialize the lesson
 
             # Add signed urls 
-            if lesson_data.video:
-                video_signed_url = generate_signed_url(lesson_data.video.name)
+            if 'video' in lesson_data and lesson_data['video']:
+                video_signed_url = generate_signed_url(lesson_data['video'])
                 lesson_data['video_url'] = video_signed_url
             
-            if lesson_data.image:
-                image_signed_url = generate_signed_url(lesson_data.image.name)
+            if 'image' in lesson_data and lesson_data['image']:
+                image_signed_url = generate_signed_url(lesson_data['image'])
                 lesson_data['image_url'] = image_signed_url
 
             return Response(lesson_data, status=status.HTTP_200_OK)
