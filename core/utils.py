@@ -1,6 +1,7 @@
 from django.conf import settings
 import boto3
 
+# not needed - urls automatically signed
 def generate_signed_url(file_path, expiration=3600):
     print(f"Generating signed URL for file_path: {file_path}")  # Debugging
     s3 = boto3.client(

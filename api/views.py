@@ -281,20 +281,8 @@ class LessonView(APIView):
     def get(self, request, lesson_id):
         try:
             lesson = Lesson.objects.get(id=lesson_id) # get specified lesson from lesson_id
-            lesson_data = LessonSerializer(lesson).data # serialize the lesson
-
-            # Add signed urls 
-            if 'video' in lesson_data and lesson_data['video']:
-                print(lesson_data['video'])
-                video_signed_url = generate_signed_url(lesson_data['video'])
-                lesson_data['video_url'] = video_signed_url
-            
-            if 'image' in lesson_data and lesson_data['image']:
-                print(lesson_data['image'])
-                image_signed_url = generate_signed_url(lesson_data['image'])
-                lesson_data['image_url'] = image_signed_url
-
-            return Response(lesson_data, status=status.HTTP_200_OK)
+            serializer = LessonSerializer(lesson) # serialize the lesson
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except Lesson.DoesNotExist:
             return Response({"error": "Lesson not found."}, status=status.HTTP_404_NOT_FOUND)
 
