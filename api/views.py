@@ -34,6 +34,7 @@ from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib.auth.tokens import PasswordResetTokenGenerator, default_token_generator
+from core.utils import generate_signed_url
 
 def CheckAuthenticationView(request):
     """Checks if the requesting user is logged in"""
@@ -280,8 +281,18 @@ class LessonView(APIView):
     def get(self, request, lesson_id):
         try:
             lesson = Lesson.objects.get(id=lesson_id) # get specified lesson from lesson_id
-            serializer = LessonSerializer(lesson) # serialize the lesson
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            lesson_data = LessonSerializer(lesson).data # serialize the lesson
+
+            # Add signed urls 
+            if lesson_data.video:
+                video_signed_url = generate_signed_url(lesson_data.video.name)
+                lesson_data['video_url'] = video_signed_url
+            
+            if lesson_data.image:
+                image_signed_url = generate_signed_url(lesson_data.image.name)
+                lesson_data['image_url'] = image_signed_url
+
+            return Response(lesson_data, status=status.HTTP_200_OK)
         except Lesson.DoesNotExist:
             return Response({"error": "Lesson not found."}, status=status.HTTP_404_NOT_FOUND)
 
