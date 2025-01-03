@@ -152,7 +152,8 @@ REST_FRAMEWORK = {
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [  
-    'https://houseofharmonymusic.onrender.com'
+    'https://houseofharmonymusic.onrender.com',
+    'https://houseofharmonymusic-api.onrender.com'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
