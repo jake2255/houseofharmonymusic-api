@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['houseofharmonymusic-api.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -174,9 +174,9 @@ CSRF_USE_SESSIONS = False
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-CSRF_COOKIE_NAME = 'csrftoken'
-#CSRF_HEADER_NAME = 'X-CSRFToken'
-CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
+# CSRF_COOKIE_NAME = 'csrftoken'
+# #CSRF_HEADER_NAME = 'X-CSRFToken'
+# CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
 
 # stripe payment
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
