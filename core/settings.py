@@ -14,6 +14,7 @@ from pathlib import Path
 import dj_database_url
 import os
 from storages.backends.s3boto3 import S3Boto3Storage
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -154,15 +155,19 @@ REST_FRAMEWORK = {
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [  
-    # 'https://houseofharmonymusic.onrender.com',
-    # 'https://houseofharmonymusic-api.onrender.com'
-    '*'
+    'https://houseofharmonymusic.onrender.com',
+    'https://houseofharmonymusic-api.onrender.com'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    # 'https://houseofharmonymusic.onrender.com',
-    # 'https://houseofharmonymusic-api.onrender.com'
-    '*'
+    'https://houseofharmonymusic.onrender.com',
+    'https://houseofharmonymusic-api.onrender.com'
+]
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'X-CSRFToken',
+    'Authorization',
+    'Content-Type',
 ]
 
 CSRF_COOKIE_SAMESITE = 'None'
