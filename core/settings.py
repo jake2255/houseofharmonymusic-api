@@ -166,6 +166,8 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-CSRFToken',
+    'csrftoken',
+    'Cookie',
     'Authorization',
     'Content-Type',
 ]
