@@ -99,12 +99,10 @@ class LoginAccountView(APIView):
 class LogoutAccountView(APIView):
     """Logout user's account"""
     def post(self, request):
-        print(request.COOKIES)
+        print("COOKIES RECIEVED FROM THE FRONTEND: ", request.COOKIES)
         if request.user.is_authenticated:
-            print("USER HAS A SESSION")
             logout(request) # built-in function that logs out user and ends session
             return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
-        print("USER DOES NOT HAVE A SESSION")
         return Response({'error': 'Logout failed, user not authenticated.'}, status=status.HTTP_403_FORBIDDEN)
 
 class AccountView(APIView):
@@ -502,6 +500,7 @@ class CreateCheckoutSessionView(APIView):
         Uses stripe API to handle all the payment process
     """
     def post(self, request):
+        print("COOKIES RECIEVED FROM THE FRONTEND: ", request.COOKIES)
         try:
             # Get course data
             course_id = request.data.get("course_id") 
