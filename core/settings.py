@@ -164,6 +164,11 @@ CSRF_TRUSTED_ORIGINS = [
     'https://houseofharmonymusic-api.onrender.com'
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    'https://houseofharmonymusic.onrender.com',
+    'https://houseofharmonymusic-api.onrender.com'
+]
+
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-CSRFToken',
     'csrftoken',
