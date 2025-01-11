@@ -50,12 +50,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -183,7 +183,7 @@ CSRF_USE_SESSIONS = False
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-# CSRF_COOKIE_NAME = 'csrftoken'
+CSRF_COOKIE_NAME = 'csrftoken'
 # #CSRF_HEADER_NAME = 'X-CSRFToken'
 # CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
 
