@@ -169,8 +169,6 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-CSRFToken',
-    'csrftoken',
-    'Cookie',
     'Authorization',
     'Content-Type',
 ]
@@ -186,8 +184,8 @@ CSRF_USE_SESSIONS = False
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-CSRF_COOKIE_DOMAIN = '.onrender.com'
-SESSION_COOKIE_DOMAIN = '.onrender.com'
+# CSRF_COOKIE_DOMAIN = '.onrender.com'
+# SESSION_COOKIE_DOMAIN = '.onrender.com'
 
 CSRF_COOKIE_NAME = 'csrftoken'
 CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
