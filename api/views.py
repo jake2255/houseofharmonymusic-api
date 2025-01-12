@@ -35,7 +35,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib.auth.tokens import PasswordResetTokenGenerator, default_token_generator
 from core.utils import generate_signed_url
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.utils.decorators import method_decorator
 
 def CheckAuthenticationView(request):
@@ -98,7 +98,7 @@ class LoginAccountView(APIView):
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(login_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-@method_decorator(ensure_csrf_cookie, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
 class LogoutAccountView(APIView):
     """Logout user's account"""
     def post(self, request):
@@ -496,7 +496,7 @@ def AddCourseToAccount(course_id, user_id):
         return Response({"error": "Course not found."}, status=status.HTTP_404_NOT_FOUND)
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
-@method_decorator(ensure_csrf_cookie, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
 class CreateCheckoutSessionView(APIView):
     """
         Stripe payment
