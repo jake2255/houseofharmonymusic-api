@@ -98,7 +98,7 @@ class LoginAccountView(APIView):
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(login_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class LogoutAccountView(APIView):
     """Logout user's account"""
     def post(self, request):
@@ -496,7 +496,7 @@ def AddCourseToAccount(course_id, user_id):
         return Response({"error": "Course not found."}, status=status.HTTP_404_NOT_FOUND)
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(ensure_csrf_cookie, name='dispatch')
 class CreateCheckoutSessionView(APIView):
     """
         Stripe payment
