@@ -45,6 +45,7 @@ def CheckAuthenticationView(request):
     return JsonResponse({'authenticated': False})
 
 @permission_classes([AllowAny])
+@ensure_csrf_cookie
 def CsrfTokenView(request):
     """Create csrf token and send to frontend"""
     csrf_token = get_token(request) # built-in function that creates csrf tokens
