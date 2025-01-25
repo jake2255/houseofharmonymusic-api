@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'houseofharmonymusic.onrender.com',
+    'houseofharmonymusic-app.onrender.com',
     'houseofharmonymusic-api.onrender.com',
 ]
 
@@ -158,20 +158,20 @@ REST_FRAMEWORK = {
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [  
-    'https://houseofharmonymusic.onrender.com',
+    'https://houseofharmonymusic-app.onrender.com',
     'https://houseofharmonymusic-api.onrender.com'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://houseofharmonymusic.onrender.com',
+    'https://houseofharmonymusic-app.onrender.com',
     'https://houseofharmonymusic-api.onrender.com'
 ]
 
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'X-CSRFToken',
-    'Authorization',
-    'Content-Type',
-]
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+#     'X-CSRFToken',
+#     'Authorization',
+#     'Content-Type',
+# ]
 
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
