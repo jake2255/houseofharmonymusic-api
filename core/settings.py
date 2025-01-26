@@ -31,6 +31,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'houseofharmonymusic-app.onrender.com',
     'houseofharmonymusic-api.onrender.com',
+    'houseofharmonymusic.net',
+    'api.houseofharmonymusic.net'
 ]
 
 
@@ -159,12 +161,16 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [  
     'https://houseofharmonymusic-app.onrender.com',
-    'https://houseofharmonymusic-api.onrender.com'
+    'https://houseofharmonymusic-api.onrender.com',
+    'https://houseofharmonymusic.net',
+    'https://api.houseofharmonymusic.net',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://houseofharmonymusic-app.onrender.com',
-    'https://houseofharmonymusic-api.onrender.com'
+    'https://houseofharmonymusic-api.onrender.com',
+    'https://houseofharmonymusic.net',
+    'https://api.houseofharmonymusic.net',
 ]
 
 # CORS_ALLOW_HEADERS = list(default_headers) + [
@@ -184,8 +190,8 @@ CSRF_USE_SESSIONS = False
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-# CSRF_COOKIE_DOMAIN = ''
-# SESSION_COOKIE_DOMAIN = ''
+CSRF_COOKIE_DOMAIN = '.houseofharmonymusic.net'
+SESSION_COOKIE_DOMAIN = '.houseofharmonymusic.net'
 
 # CSRF_COOKIE_NAME = 'csrftoken'
 # CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
