@@ -411,7 +411,7 @@ class RequestPasswordResetView(APIView):
         try:
             user = User.objects.get(email=email)
             token = PasswordResetTokenGenerator().make_token(user)
-            reset_url = f"https://houseofharmonymusic-app/password-reset/{user.id}/{token}"
+            reset_url = f"https://houseofharmonymusic.net/password-reset/{user.id}/{token}"
             sendEmail([email], 'House of Harmony Music - Password Reset', f"Click the link to reset your password: {reset_url}")
             return Response({'success': 'Password reset email sent.'}, status=status.HTTP_201_CREATED)
         except User.DoesNotExist:
@@ -426,7 +426,7 @@ class RequestUsernameResetView(APIView):
         try:
             user = User.objects.get(email=email)
             token = PasswordResetTokenGenerator().make_token(user)
-            reset_url = f"https://houseofharmonymusic-app/username-reset/{user.id}/{token}"
+            reset_url = f"https://houseofharmonymusic.net/username-reset/{user.id}/{token}"
             sendEmail([email], 'House of Harmony Music - Username Reset', f"Click the link to reset your username: {reset_url}")
             return Response({'success': 'Username reset email sent.'}, status=status.HTTP_201_CREATED)
         except User.DoesNotExist:
@@ -514,8 +514,8 @@ class CreateCheckoutSessionView(APIView):
             name = course.title
 
             # Set return urls
-            success_url = f'https://houseofharmonymusic-app.onrender.com/course-list/course/{course_id}?success=true'
-            cancel_url = f'https://houseofharmonymusic-app.onrender.com/course-list/course/{course_id}?canceled=true'
+            success_url = f'https://api.houseofharmonymusic.net/course-list/course/{course_id}?success=true'
+            cancel_url = f'https://api.houseofharmonymusic.net/course-list/course/{course_id}?canceled=true'
 
             # Skips checkout if course is free
             if price <= 0:
