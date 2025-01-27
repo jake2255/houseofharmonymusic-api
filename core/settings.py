@@ -192,8 +192,8 @@ CSRF_USE_SESSIONS = False
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-CSRF_COOKIE_DOMAIN = '.houseofharmonymusic.net'
-SESSION_COOKIE_DOMAIN = '.houseofharmonymusic.net'
+# CSRF_COOKIE_DOMAIN = '.houseofharmonymusic.net'
+# SESSION_COOKIE_DOMAIN = '.houseofharmonymusic.net'
 
 # CSRF_COOKIE_NAME = 'csrftoken'
 # CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
