@@ -29,10 +29,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'houseofharmonymusic-app.onrender.com',
-    'houseofharmonymusic-api.onrender.com',
-    'houseofharmonymusic.net',
-    'api.houseofharmonymusic.net'
+    # 'houseofharmonymusic-app.onrender.com',
+    # 'houseofharmonymusic-api.onrender.com',
+    # 'houseofharmonymusic.net',
+    # 'api.houseofharmonymusic.net'
+    '*'
 ]
 
 
