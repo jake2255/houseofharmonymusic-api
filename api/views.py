@@ -514,8 +514,8 @@ class CreateCheckoutSessionView(APIView):
             name = course.title
 
             # Set return urls
-            success_url = f'https://api.houseofharmonymusic.net/course-list/course/{course_id}?success=true'
-            cancel_url = f'https://api.houseofharmonymusic.net/course-list/course/{course_id}?canceled=true'
+            success_url = f'https://houseofharmonymusic.net/course-list/course/{course_id}?success=true'
+            cancel_url = f'https://houseofharmonymusic.net/course-list/course/{course_id}?canceled=true'
 
             # Skips checkout if course is free
             if price <= 0:
