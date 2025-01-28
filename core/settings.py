@@ -29,11 +29,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    # 'houseofharmonymusic-app.onrender.com',
-    # 'houseofharmonymusic-api.onrender.com',
-    # 'houseofharmonymusic.net',
-    # 'api.houseofharmonymusic.net'
-    '*'
+    'houseofharmonymusic-app.onrender.com',
+    'houseofharmonymusic-api.onrender.com',
+    'houseofharmonymusic.net',
+    'api.houseofharmonymusic.net'
+    # '*'
 ]
 
 
@@ -147,7 +147,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
-        #'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
@@ -176,11 +175,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://www.houseofharmonymusic.net'
 ]
 
-# CORS_ALLOW_HEADERS = list(default_headers) + [
-#     'X-CSRFToken',
-#     'Authorization',
-#     'Content-Type',
-# ]
 
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
@@ -196,8 +190,6 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_DOMAIN = '.houseofharmonymusic.net'
 SESSION_COOKIE_DOMAIN = '.houseofharmonymusic.net'
 
-# CSRF_COOKIE_NAME = 'csrftoken'
-# CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
 
 # stripe payment
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
